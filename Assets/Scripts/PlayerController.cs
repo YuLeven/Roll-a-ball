@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
-    private struct Direction {
+    private struct Direction
+    {
         public const string HORIZONTAL = "Horizontal";
         public const string VERTICAL = "Vertical";
     }
@@ -11,19 +13,19 @@ public class PlayerController : MonoBehaviour {
 
     public float speed;
 
-    private void Start ()
+    private void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
     }
 
 
-    private void FixedUpdate ()
+    private void FixedUpdate()
     {
-        float moveHorizontal = Input.GetAxis (Direction.HORIZONTAL);
-        float moveVertical = Input.GetAxis (Direction.VERTICAL);
+        float moveHorizontal = Input.GetAxis(Direction.HORIZONTAL);
+        float moveVertical = Input.GetAxis(Direction.VERTICAL);
 
         var movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 
-        rigidBody.AddForce (movement * speed);
+        rigidBody.AddForce(movement * speed);
     }
 }
