@@ -2,14 +2,8 @@
 
 public class PlayerController : MonoBehaviour
 {
-
-    private struct Direction
-    {
-        public const string HORIZONTAL = "Horizontal";
-        public const string VERTICAL = "Vertical";
-    }
-
     private Rigidbody rigidBody;
+    private const string PICK_UP = "PickUp";
 
     public float speed;
 
@@ -27,5 +21,13 @@ public class PlayerController : MonoBehaviour
         var movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
 
         rigidBody.AddForce(movement * speed);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag(PICK_UP))
+        {
+            other.gameObject.SetActive(false);
+        }
     }
 }
