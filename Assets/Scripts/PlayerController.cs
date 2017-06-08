@@ -1,17 +1,34 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody rigidBody;
     private const string PICK_UP = "PickUp";
+    private const int TOTAL_GAME_OBJECTS = 14;
+
+    private Rigidbody rigidBody;
+    private int count;
 
     public float speed;
+    public Text countText;
+    public Text winText;
 
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        count = 0;
+        UpdateCounterText();
+        winText.text = "";
     }
 
+    private void UpdateCounterText()
+    {
+        countText.text = "Count: " + count.ToString();
+        if (count >= TOTAL_GAME_OBJECTS)
+        {
+            winText.text = "You win!";
+        }
+    }
 
     private void FixedUpdate()
     {
@@ -28,6 +45,8 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag(PICK_UP))
         {
             other.gameObject.SetActive(false);
+            count++;
+            UpdateCounterText();
         }
     }
 }
